@@ -1,0 +1,36 @@
+<!-- user_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - User Dashboard</title>
+  <link rel="stylesheet" href="user_dashboard.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">SAFENET</div>
+    <div class="moto">Report. Protect. Educate.</div>
+    <div class="user-info">
+      <span id="loggedUser"></span> | <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <div class="container">
+    <h2>User Dashboard</h2>
+    <div class="dashboard-grid">
+      <div class="dash-card"><a href="report.html"><h3>Report Cyberbullying</h3></a></div>
+      <div class="dash-card" onclick="alert('Your reports: 2 pending, 1 resolved')"><h3>Track Reports</h3></div>
+      <div class="dash-card"><a href="ai_chat.html"><h3>AI Mental Support Chat</h3></a></div>
+      <div class="dash-card"><a href="awareness.html"><h3>Awareness Hub</h3></a></div>
+      <div class="dash-card"><a href="profile_view.html"><h3>View Profile</h3></a></div>
+      <div class="dash-card"><a href="profile_edit.html"><h3>Edit Profile</h3></a></div>
+      <div class="dash-card"><a href="change_password.html"><h3>Change Password</h3></a></div>
+    </div>
+  </div>
+  <footer class="bottombar">
+    © 2025 SAFENET by AIUB CS Students | All Rights Reserved
+  </footer>
+  <script src="user_dashboard.js"></script>
+</body>
+</html>

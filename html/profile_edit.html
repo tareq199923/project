@@ -1,0 +1,34 @@
+<!-- profile_edit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - Edit Profile</title>
+  <link rel="stylesheet" href="profile_edit.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">SAFENET</div>
+    <div class="moto">Report. Protect. Educate.</div>
+    <div class="user-info">
+      <span id="loggedUser"></span> | <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <div class="container">
+    <h2>Edit Profile</h2>
+    <form id="editForm" class="card">
+      <input type="text" id="editName" placeholder="Name" required/>
+      <input type="email" id="editEmail" placeholder="Email" required/>
+      <input type="tel" id="editPhone" placeholder="Phone (11 digits)"/>
+      <input type="date" id="editDob" required/>
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+  <footer class="bottombar">
+    © 2025 SAFENET by AIUB CS Students | All Rights Reserved
+  </footer>
+  <script src="profile_edit.js"></script>
+</body>
+</html>

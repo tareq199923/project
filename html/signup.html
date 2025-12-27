@@ -1,0 +1,36 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - Signup</title>
+  <link rel="stylesheet" href="signup.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <input type="text" placeholder="Full Name" id="sName" required/>
+        <input type="text" placeholder="Username" id="sUsername" required/>
+        <input type="email" placeholder="Email" id="sEmail" required/>
+        <select id="sGender" required><option value="">Gender</option><option>Male</option><option>Female</option><option>Other</option></select>
+        <input type="date" id="sDob" required/>
+        <input type="password" placeholder="Password" id="sPassword" required/>
+        <input type="password" placeholder="Confirm Password" id="sRePassword" required/>
+        <select id="sUserType" required>
+          <option value="">Select User Type</option>
+          <option value="user">User</option>
+          <option value="consultant">Consultant</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Sign Up</button>
+        <p><a href="login.html">Already have an account? Sign In</a></p>
+      </form>
+    </div>
+  </div>
+  <script src="signup.js"></script>
+</body>
+</html>

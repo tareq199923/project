@@ -1,0 +1,43 @@
+<!-- report.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - Report Cyberbullying</title>
+  <link rel="stylesheet" href="report.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">SAFENET</div>
+    <div class="moto">Report. Protect. Educate.</div>
+    <div class="user-info">
+      <span id="loggedUser"></span> | <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <div class="container">
+    <h2>Report Cyberbullying</h2>
+    <form id="reportForm" class="card">
+      <textarea id="incidentDesc" placeholder="Describe the incident..." required></textarea>
+      <select id="relationship" required>
+        <option value="">Relationship with person?</option>
+        <option>Known (Friend/Classmate)</option>
+        <option>Unknown</option>
+      </select>
+      <select id="bullyingType" required>
+        <option value="">Type of Cyberbullying</option>
+        <option>Harassment</option>
+        <option>Threats</option>
+        <option>Doxxing</option>
+        <option>Hate Speech</option>
+      </select>
+      <button type="submit">Submit Report</button>
+    </form>
+  </div>
+  <footer class="bottombar">
+    © 2025 SAFENET by AIUB CS Students | All Rights Reserved
+  </footer>
+  <script src="report.js"></script>
+</body>
+</html>

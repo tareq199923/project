@@ -1,0 +1,30 @@
+<!-- forgot.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - Forgot Password</title>
+  <link rel="stylesheet" href="forgot.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Reset Password</h2>
+      <div id="forgotStep1">
+        <input type="email" id="forgotEmail" placeholder="Enter your email" required/>
+        <button onclick="sendResetCode()">Send Code</button>
+      </div>
+      <div id="forgotStep2" style="display:none;">
+        <input type="text" id="resetCode" placeholder="Verification Code" required/>
+        <input type="password" id="newPass" placeholder="New Password" required/>
+        <input type="password" id="newPassConfirm" placeholder="Confirm Password" required/>
+        <button onclick="resetPassword()">Change Password</button>
+      </div>
+      <p><a href="login.html">Back to Login</a></p>
+    </div>
+  </div>
+  <script src="forgot.js"></script>
+</body>
+</html>

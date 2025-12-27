@@ -1,0 +1,35 @@
+<!-- ai_chat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - AI Chat Support</title>
+  <link rel="stylesheet" href="ai_chat.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">SAFENET</div>
+    <div class="moto">Report. Protect. Educate.</div>
+    <div class="user-info">
+      <span id="loggedUser"></span> | <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <div class="container">
+    <h2>AI Support Chat</h2>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type a message..."/>
+      <button onclick="sendMessage()">Send</button>
+    </div>
+    <p style="text-align:center;margin-top:20px;">
+      <button onclick="alert('Connecting you to a real counselor... (Demo)')">Connect to Human Counselor</button>
+    </p>
+  </div>
+  <footer class="bottombar">
+    © 2025 SAFENET by AIUB CS Students | All Rights Reserved
+  </footer>
+  <script src="ai_chat.js"></script>
+</body>
+</html>

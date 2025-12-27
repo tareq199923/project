@@ -1,0 +1,39 @@
+<!-- profile_view.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAFENET - View Profile</title>
+  <link rel="stylesheet" href="profile_view.css"/>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">SAFENET</div>
+    <div class="moto">Report. Protect. Educate.</div>
+    <div class="user-info">
+      <span id="loggedUser"></span> | <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <div class="container">
+    <h2>My Profile</h2>
+    <div class="card">
+      <table id="profileTable">
+        <tr><td>Name</td><td id="pName"></td></tr>
+        <tr><td>Username</td><td id="pUsername"></td></tr>
+        <tr><td>Email</td><td id="pEmail"></td></tr>
+        <tr><td>Gender</td><td id="pGender"></td></tr>
+        <tr><td>Date of Birth</td><td id="pDob"></td></tr>
+        <tr><td>Phone</td><td id="pPhone"></td></tr>
+        <tr><td>User Type</td><td id="pType"></td></tr>
+      </table>
+      <button onclick="window.location.href='profile_edit.html'">Edit Profile</button>
+    </div>
+  </div>
+  <footer class="bottombar">
+    © 2025 SAFENET by AIUB CS Students | All Rights Reserved
+  </footer>
+  <script src="profile_view.js"></script>
+</body>
+</html>
