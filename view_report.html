@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFENET - View Reports</title>
+    <link rel="icon" href="https://img.icons8.com/fluency/48/shield.png"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #f0f2f5;
+            color: #333;
+        }
+        
+        .topbar {
+            background: #1a3b5d;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 50px;
+            padding: 20px;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a3b5d;
+        }
+        
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filters select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            font-size: 32px;
+            color: #1a3b5d;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card p {
+            color: #666;
+        }
+        
+        .report-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #1a3b5d;
+        }
+        
+        .report-card.pending {
+            border-left-color: #ffa500;
+        }
+        
+        .report-card.resolved {
+            border-left-color: #28a745;
+        }
+        
+        .report-card.under_review {
+            border-left-color: #007bff;
+        }
+        
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .report-id {
+            font-weight: bold;
+            color: #1a3b5d;
+        }
+        
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-resolved {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-under_review {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        
+        .metadata-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            padding: 5px 0;
+        }
+        
+        .metadata-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .incident-text {
+            line-height: 1.6;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .no-reports {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+        }
+        
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="logo">SAFENET</div>
+        <div class="user-info">
+            <span id="loggedUser"></span> | 
+            <a href="#" onclick="logout()">Logout</a> | 
+            <a href="admin_dashboard.html">Dashboard</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Reports Management</h2>
+        
+        <div class="stats" id="statsContainer">
+            <div class="stat-card">
+                <h3 id="totalReports">0</h3>
+                <p>Total Reports</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="pendingReports">0</h3>
+                <p>Pending</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="reviewReports">0</h3>
+                <p>Under Review</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="resolvedReports">0</h3>
+                <p>Resolved</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <select id="statusFilter" onchange="loadReports()">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="under_review">Under Review</option>
+                <option value="resolved">Resolved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+
+        <div id="reportsContainer">
+            <div class="loading">Loading reports...</div>
+        </div>
+    </div>
+
+    <script>
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+
+        if (!currentUser || (currentUser.type !== 'admin' && currentUser.type !== 'consultant')) {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('loggedUser').textContent = `Logged in as ${currentUser.name}`;
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        async function loadReports() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const container = document.getElementById('reportsContainer');
+            
+            try {
+                const response = await fetch(`php/get_reports.php?status=${statusFilter}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    displayReports(result.reports);
+                    updateStats(result.reports);
+                } else {
+                    container.innerHTML = `<div class="no-reports">Error: ${result.message}</div>`;
+                }
+            } catch (error) {
+                console.error('Error loading reports:', error);
+                container.innerHTML = '<div class="no-reports">Failed to load reports. Please try again.</div>';
+            }
+        }
+
+        function displayReports(reports) {
+            const container = document.getElementById('reportsContainer');
+            
+            if (reports.length === 0) {
+                container.innerHTML = '<div class="no-reports">No reports found.</div>';
+                return;
+            }
+
+            container.innerHTML = reports.map(report => `
+                <div class="report-card ${report.status}">
+                    <div class="report-header">
+                        <span class="report-id">Report #${report.id}</span>
+                        <span class="status-badge status-${report.status}">${report.status.replace('_', ' ')}</span>
+                    </div>
+                    
+                    <div>
+                        <strong>Type:</strong> ${report.bullying_type} | 
+                        <strong>Relationship:</strong> ${report.relationship}
+                    </div>
+                    
+                    <div class="incident-text">
+                        <strong>Incident Description:</strong><br>
+                        ${report.incident_description}
+                    </div>
+                    
+                    <div class="metadata">
+                        <h4 style="margin-bottom: 10px;">Reporter Metadata</h4>
+                        <div class="metadata-row">
+                            <span class="metadata-label">Username:</span>
+                            <span>${report.metadata.reporter_username}</span>
+                        </div>
+                        <div class="metadata-row">
+                            <span class="metadata-label">Name:</span>
+                            <span>${report.metadata.reporter_name}</span>
+                        </div>
+                        <div class="metadata-row">
+                            <span class="metadata-label">Email:</span>
+                            <span>${report.metadata.reporter_email}</span>
+                        </div>
+                        <div class="metadata-row">
+                            <span class="metadata-label">IP Address:</span>
+                            <span>${report.metadata.reporter_ip}</span>
+                        </div>
+                        <div class="metadata-row">
+                            <span class="metadata-label">Submitted:</span>
+                            <span>${new Date(report.submitted_at).toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateStats(reports) {
+            document.getElementById('totalReports').textContent = reports.length;
+            document.getElementById('pendingReports').textContent = 
+                reports.filter(r => r.status === 'pending').length;
+            document.getElementById('reviewReports').textContent = 
+                reports.filter(r => r.status === 'under_review').length;
+            document.getElementById('resolvedReports').textContent = 
+                reports.filter(r => r.status === 'resolved').length;
+        }
+
+        // Load reports on page load
+        loadReports();
+    </script>
+</body>
+</html>
